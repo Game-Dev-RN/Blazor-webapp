@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "sass": "^1.90.0"
+  },
+  "scripts": {
+    "watch": "sass --watch WebGUI/Scss/index.scss:WebGUI/wwwroot/app.css"
+  }
+}

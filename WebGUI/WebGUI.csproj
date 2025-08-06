@@ -6,4 +6,9 @@
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="wwwroot\scss\index.scss" />
+      <_ContentIncludedByDefault Remove="wwwroot\scss\_base.scss" />
+    </ItemGroup>
+
 </Project>
