@@ -1,6 +1,21 @@
+using Microsoft.EntityFrameworkCore;
+using Model.Entities;
+
 namespace Model.Configurations;
 
-public class UserContext
+public class UserContext: DbContext
 {
-    
+    public UserContext(DbContextOptions<UserContext> options): base(options)
+    {
+        
+    }
+
+    public DbSet<User> Users { get; set; }
+
+
+
+
+
+
+
 }
