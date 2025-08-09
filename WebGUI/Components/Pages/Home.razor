@@ -5,3 +5,17 @@
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
+
+
+<div>
+    <AuthorizeView>
+        <NotAuthorized>
+            <h1>nene nicht Authorized</h1>
+            <a href="/Login">Login</a>
+        </NotAuthorized>
+        <Authorized>
+            <h1>Yes sir welcome back @context.User.Identity.Name</h1>
+            <a href="/Logout">Logout</a>
+        </Authorized>
+    </AuthorizeView>
+</div>

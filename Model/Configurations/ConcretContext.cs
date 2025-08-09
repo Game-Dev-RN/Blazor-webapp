@@ -14,7 +14,12 @@ public class ConcretContext: DbContext
 
 
 
-
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<User>()
+            .Property(u => u.Role)
+            .HasConversion<string>(); // Speichert z. B. "Admin" statt 2
+    }
 
 
 
