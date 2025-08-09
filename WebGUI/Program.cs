@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services.AddDbContextFactory<UserContext>(options => options.UseMySql(
+builder.Services.AddDbContextFactory<ConcretContext>(options => options.UseMySql(
     builder.Configuration.GetConnectionString("DefaultConnection"), 
     new MySqlServerVersion(new Version(8, 0, 21))
     ));

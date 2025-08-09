@@ -3,9 +3,9 @@ using Model.Entities;
 
 namespace Model.Configurations;
 
-public class UserContext: DbContext
+public class ConcretContext: DbContext
 {
-    public UserContext(DbContextOptions<UserContext> options): base(options)
+    public ConcretContext(DbContextOptions<ConcretContext> options): base(options)
     {
         
     }
