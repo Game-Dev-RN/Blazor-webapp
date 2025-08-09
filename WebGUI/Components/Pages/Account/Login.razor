@@ -1,0 +1,65 @@
+@page "/Login"
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Authentication
+@using Microsoft.AspNetCore.Authentication.Cookies
+@using Model.Configurations
+@using Model.ViewModels
+@inject ConcretContext ConcretContext
+@inject IHttpContextAccessor HttpContextAccessor
+@inject NavigationManager NavigationManager
+<h3>Login</h3>
+
+
+<div class="row">
+    <div class="container">
+        <EditForm Model="LoginViewModel" OnValidSubmit="Authenticate" FormName="LoginForm">
+            <div>
+                <InputText @bind-Value="LoginViewModel.UserName"></InputText>
+                <ValidationMessage For="() => LoginViewModel.UserName"/>
+            </div>
+            <div>
+                <InputText @bind-Value="LoginViewModel.Password"></InputText>
+                <ValidationMessage For="() => LoginViewModel.Password"/>
+            </div>
+            <div>
+                <p>@errorMessage</p>
+                <button type="submit">Login</button>
+            </div>
+        </EditForm>
+    </div>
+</div>
+@code {
+    [SupplyParameterFromForm]
+    public LoginViewModel LoginViewModel { get; set; } = new();
+
+    private string? errorMessage;
+
+    private async Task Authenticate()
+    {
+        Console.WriteLine(LoginViewModel.UserName + "LoginView");
+        var userAccount = ConcretContext.Users
+            .FirstOrDefault(u => u.FirstName == LoginViewModel.UserName);
+
+        if (userAccount?.Password != LoginViewModel.Password)
+        {
+            errorMessage = "Wrong username or password";
+            return;
+        }
+
+        var claims = new List<Claim>
+        {
+            new(ClaimTypes.Name, LoginViewModel.UserName),
+            new(ClaimTypes.Role, userAccount.Role.ToString())
+        };
+
+        var identity = new ClaimsIdentity(claims, 
+            CookieAuthenticationDefaults.AuthenticationScheme);
+        var principal = new ClaimsPrincipal(identity);
+
+        await HttpContextAccessor.HttpContext!.SignInAsync(
+            CookieAuthenticationDefaults.AuthenticationScheme,
+            principal);
+        
+        NavigationManager.NavigateTo("/");
+    }
+}

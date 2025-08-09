@@ -11,4 +11,16 @@ public class User
     public required string FirstName { get; set; }
     [Required, MaxLength(50), Column("LAST_NAME")]
     public required string LastName { get; set; }
+    [Required, MaxLength(50), Column("PASSWORD")]
+    public required string Password { get; set; }
+    
+    [Required, Column("ROLE")]
+    public ERole Role { get; set; }
+}
+
+public enum ERole
+{
+    Administrator,
+    User
+    
 }
