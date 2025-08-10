@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Model.Configurations;
+using MudBlazor.Services;
 using WebGUI.Components;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,7 +14,7 @@ builder.Services.AddDbContextFactory<ConcretContext>(options => options.UseMySql
     new MySqlServerVersion(new Version(8, 0, 21))
     ));
 
-
+builder.Services.AddMudServices();
 
 
 
