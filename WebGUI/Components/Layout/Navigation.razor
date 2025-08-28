@@ -1,34 +1,48 @@
-<MudAppBar Color="Color.Primary" Fixed="false">
-    <MudMenu Dense
-             Variant="Variant.Text"
-             Size="Size.Medium"
-             Color="Color.Inherit"
-             Icon="@Icons.Material.TwoTone.MoreVert">
+@using MudBlazor
+@inject NavigationManager NavigationManager
 
-        <MudMenu StartIcon="@Icons.Material.TwoTone.Settings"
-                 IconColor="Color.Primary"
-                 Label="Settings">
-            <MudMenuItem Icon="@Icons.Material.TwoTone.DarkMode"
-                         IconColor="Color.Secondary"
-                         Label="Dark Theme" />
-        </MudMenu>
-
-        <MudDivider />
-
-        <MudMenuItem Href="/"
-                     ForceLoad
-                     Icon="@Icons.Material.TwoTone.Login"
-                     IconColor="Color.Primary"
-                     Label="Sign In" />
-
-        <MudMenuItem Href="/"
-                     ForceLoad
-                     Icon="@Icons.Material.TwoTone.Logout"
-                     IconColor="Color.Primary"
-                     Label="Sign Out" />
+<MudAppBar Elevation="4" Fixed="true" Dense="true">
+    <MudToolBar>
+        <!-- Menu button for drawer -->
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="DrawerToggle" />
+        
+        <!-- App title/logo -->
+        <MudText Typo="Typo.h6" Class="ml-2">My Application</MudText>
+    </MudToolBar>
+    <MudSpacer/>
+    <!-- User menu -->
+    <MudMenu Icon="@Icons.Material.Filled.AccountCircle" Label="Account" Color="Color.Inherit" 
+             AnchorOrigin="Origin.BottomRight" TransformOrigin="Origin.TopRight">
+        <AuthorizeView>
+            <Authorized>
+                <MudMenuItem OnClick='() => NavigateTo("/profile")'>Profile</MudMenuItem>
+                <MudMenuItem OnClick='() => NavigateTo("/settings")'>Settings</MudMenuItem>
+                <MudDivider />
+                <MudMenuItem OnClick='() => NavigateTo("/logout")'>Logout</MudMenuItem>
+            </Authorized>
+            <NotAuthorized>
+                <MudMenuItem OnClick='() => NavigateTo("/login")'>Login</MudMenuItem>
+            </NotAuthorized>
+        </AuthorizeView>
     </MudMenu>
-
-    <MudSpacer />
-
-    <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" />
 </MudAppBar>
+
+<MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
+    <!-- Your navigation content here -->
+    <NavMenu />
+</MudDrawer>
+
+@code {
+    private bool _drawerOpen = false;
+
+    private void DrawerToggle()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+
+    private void NavigateTo(string route)
+    {
+        NavigationManager.NavigateTo(route);
+    }
+    
+}
