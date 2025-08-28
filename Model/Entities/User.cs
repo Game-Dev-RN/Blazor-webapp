@@ -7,6 +7,8 @@ public class User
 {
     [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), Column("USER_ID")]
     public int UserId { get; set; }
+    [Required, MaxLength(50), Column("USER_NAME")]
+    public required string Username { get; set; }
     [Required, MaxLength(50), Column("FIRST_NAME")]
     public required string FirstName { get; set; }
     [Required, MaxLength(50), Column("LAST_NAME")]
