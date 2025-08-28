@@ -15,13 +15,13 @@
              AnchorOrigin="Origin.BottomRight" TransformOrigin="Origin.TopRight">
         <AuthorizeView>
             <Authorized>
-                <MudMenuItem OnClick='() => NavigateTo("/profile")'>Profile</MudMenuItem>
-                <MudMenuItem OnClick='() => NavigateTo("/settings")'>Settings</MudMenuItem>
+                <MudMenuItem OnClick='() => NavigateTo("/Profile")'>Profile</MudMenuItem>
+                <MudMenuItem OnClick='() => NavigateTo("/Settings")'>Settings</MudMenuItem>
                 <MudDivider />
-                <MudMenuItem OnClick='() => NavigateTo("/logout")'>Logout</MudMenuItem>
+                <MudMenuItem OnClick='() => NavigateTo("/Logout")'>Logout</MudMenuItem>
             </Authorized>
             <NotAuthorized>
-                <MudMenuItem OnClick='() => NavigateTo("/login")'>Login</MudMenuItem>
+                <MudMenuItem OnClick='() => NavigateTo("/Login")'>Login</MudMenuItem>
             </NotAuthorized>
         </AuthorizeView>
     </MudMenu>
